@@ -1,0 +1,11 @@
+"ingest-es-search-and-set plugin installed":
+    - do:
+        cluster.state: {}
+
+    - set: {master_node: master}
+
+    - do:
+        nodes.info: {}
+
+    - match:  { nodes.$master.plugins.0.name: ingest-es-search-and-set }
+    - match:  { nodes.$master.ingest.processors.0.type: es_search_and_set }
